@@ -25,6 +25,7 @@
 
 
 import { galleryItems } from './gallery-items.js';
+// import * as basicLightbox from 'basiclightbox';
 
 const imgEl= galleryItems
   .map(({preview, original, description}) => `<div class="gallery__item"><a class="gallery__link" href=${original}><img class="gallery__image" src=${preview} data-source=${original} alt=${description} /></a></div>`)
@@ -44,11 +45,14 @@ function onLinkClick(event) {
     return;
   }
 
-  console.log(event.target.classList[0]);
+  basicLightbox
+  .create(`<img width="100%" height="100%" src=${event.target.dataset.source}>`)
+  .show()
+  
+  // console.log(event.target);
+  // console.log(event.target.classList[0]);
+  // console.log(event.target.dataset.source);
 }
-
-
-
 
 
 
