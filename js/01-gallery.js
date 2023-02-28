@@ -39,6 +39,7 @@ gallery.insertAdjacentHTML("beforeend", imgEl);
 gallery.addEventListener('click', onLinkClick);
 
 
+
 function onLinkClick(event) {
   event.preventDefault();
 
@@ -46,37 +47,22 @@ function onLinkClick(event) {
     return;
   }
 
-  // basicLightbox
-  // .create(`<img width="100%" height="100%" src=${event.target.dataset.source}>`)
-  // .show()
-
-
+  const closeModal = (event) => {
+    if (event.code === 'Escape') {
+      instance.close();
+    }
+  }
+  
   let instance = basicLightbox.create(`
-  <img width="100%" height="100%" src=${event.target.dataset.source}>
-`)
+  <img width="100%" height="100%" src=${event.target.dataset.source}>`, {
+    onShow: (instance) => {
+        window.addEventListener('keydown', closeModal);
+    },
+    onClose: (instance) => {window.removeEventListener('keydown', closeModal)}
+})
 
 instance.show()
-
-
-
-  
 }
-
-document.addEventListener('keydown', (e) => {
-  if (e.code === "Escape") {
-    ///
-    // instance.close();
-    
-    console.log(e.target);
-    // console.log(instance);
-  }
-
-
-    // console.log(event.target);
-  // console.log(event.target.classList[0]);
-  // console.log(event.target.dataset.source);
-
-});
 
 
 
